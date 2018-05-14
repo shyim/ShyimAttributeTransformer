@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="shyim_media.cached_table_reader" class="ShyimAttributeTransformer\Components\CachedTableReader">
+            <argument type="service" id="cache"/>
+            <argument type="service" id="shopware_attribute.crud_service"/>
+            <argument type="service" id="models"/>
+        </service>
+
+        <service id="shyim_media.attribute_transformer" class="ShyimAttributeTransformer\Components\AttributeTransformer">
+            <argument type="service" id="shyim_media.cached_table_reader"/>
+            <argument type="service" id="dbal_connection"/>
+            <argument type="service" id="shyim_media.media_transformer"/>
+        </service>
+
+        <service id="shyim_media.media_transformer" class="ShyimAttributeTransformer\Components\MediaTransformer">
+            <argument type="service" id="shopware_storefront.media_service"/>
+            <argument type="service" id="legacy_struct_converter"/>
+            <argument type="service" id="shopware_storefront.context_service"/>
+        </service>
+    </services>
+</container>
