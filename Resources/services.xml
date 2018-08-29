@@ -15,10 +15,17 @@
             <argument type="service" id="shyim_media.cached_table_reader"/>
             <argument type="service" id="dbal_connection"/>
             <argument type="service" id="shyim_media.media_transformer"/>
+            <argument type="service" id="shyim_media.product_transformer"/>
         </service>
 
         <service id="shyim_media.media_transformer" class="ShyimAttributeTransformer\Components\MediaTransformer">
             <argument type="service" id="shopware_storefront.media_service"/>
+            <argument type="service" id="legacy_struct_converter"/>
+            <argument type="service" id="shopware_storefront.context_service"/>
+        </service>
+
+        <service id="shyim_media.product_transformer" class="ShyimAttributeTransformer\Components\ProductTransformer">
+            <argument type="service" id="shopware_storefront.list_product_service"/>
             <argument type="service" id="legacy_struct_converter"/>
             <argument type="service" id="shopware_storefront.context_service"/>
         </service>

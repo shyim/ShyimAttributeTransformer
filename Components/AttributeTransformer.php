@@ -32,13 +32,19 @@ class AttributeTransformer
      * @param CachedTableReader $tableReader
      * @param Connection $connection
      * @param MediaTransformer $mediaTransformer
+     * @param ProductTransformer $produtTransformer
      * @author Soner Sayakci <shyim@posteo.de>
      */
-    public function __construct(CachedTableReader $tableReader, Connection $connection, MediaTransformer $mediaTransformer)
-    {
+    public function __construct(
+        CachedTableReader $tableReader,
+        Connection $connection,
+        MediaTransformer $mediaTransformer,
+        ProductTransformer $produtTransformer
+    ) {
         $this->tableReader = $tableReader;
         $this->connection = $connection;
         $this->transformers['s_media'] = $mediaTransformer;
+        $this->transformers['s_articles'] = $produtTransformer;
     }
 
     /**
