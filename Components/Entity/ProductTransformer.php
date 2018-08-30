@@ -1,17 +1,17 @@
 <?php
 
-namespace ShyimAttributeTransformer\Components;
+namespace ShyimAttributeTransformer\Components\Entity;
 
 use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
-use Shopware\Bundle\StoreFrontBundle\Service\Core\MediaService;
 use Shopware\Bundle\StoreFrontBundle\Service\ListProductServiceInterface;
 use Shopware\Components\Compatibility\LegacyStructConverter;
+use ShyimAttributeTransformer\Components\ModelTransformer;
 
 /**
  * Class ProductTransformer
  * @author Soner Sayakci <shyim@posteo.de>
  */
-class ProductTransformer extends ModelTransformer
+class ProductTransformer extends ModelTransformer implements EntityTransformer
 {
     /**
      * @var ListProductServiceInterface
@@ -57,5 +57,13 @@ class ProductTransformer extends ModelTransformer
 
             $this->ids = [];
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntity(): string
+    {
+        return 's_articles';
     }
 }

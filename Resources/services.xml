@@ -14,20 +14,21 @@
         <service id="shyim_media.attribute_transformer" class="ShyimAttributeTransformer\Components\AttributeTransformer">
             <argument type="service" id="shyim_media.cached_table_reader"/>
             <argument type="service" id="dbal_connection"/>
-            <argument type="service" id="shyim_media.media_transformer"/>
-            <argument type="service" id="shyim_media.product_transformer"/>
+            <argument type="collection"/>
         </service>
 
-        <service id="shyim_media.media_transformer" class="ShyimAttributeTransformer\Components\MediaTransformer">
+        <service id="shyim_media.media_transformer" class="ShyimAttributeTransformer\Components\Entity\MediaTransformer">
             <argument type="service" id="shopware_storefront.media_service"/>
             <argument type="service" id="legacy_struct_converter"/>
             <argument type="service" id="shopware_storefront.context_service"/>
+            <tag name="shyim_entity_transformer"/>
         </service>
 
-        <service id="shyim_media.product_transformer" class="ShyimAttributeTransformer\Components\ProductTransformer">
+        <service id="shyim_media.product_transformer" class="ShyimAttributeTransformer\Components\Entity\ProductTransformer">
             <argument type="service" id="shopware_storefront.list_product_service"/>
             <argument type="service" id="legacy_struct_converter"/>
             <argument type="service" id="shopware_storefront.context_service"/>
+            <tag name="shyim_entity_transformer"/>
         </service>
     </services>
 </container>

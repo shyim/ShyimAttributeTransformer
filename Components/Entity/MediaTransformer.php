@@ -1,16 +1,17 @@
 <?php
 
-namespace ShyimAttributeTransformer\Components;
+namespace ShyimAttributeTransformer\Components\Entity;
 
 use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Service\Core\MediaService;
 use Shopware\Components\Compatibility\LegacyStructConverter;
+use ShyimAttributeTransformer\Components\ModelTransformer;
 
 /**
  * Class MediaTransformer
  * @author Soner Sayakci <shyim@posteo.de>
  */
-class MediaTransformer extends ModelTransformer
+class MediaTransformer extends ModelTransformer implements EntityTransformer
 {
     /**
      * @var MediaService
@@ -56,5 +57,13 @@ class MediaTransformer extends ModelTransformer
 
             $this->ids = [];
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntity(): string
+    {
+        return 's_media';
     }
 }

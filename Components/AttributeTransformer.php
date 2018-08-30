@@ -5,6 +5,7 @@ namespace ShyimAttributeTransformer\Components;
 use Doctrine\DBAL\Connection;
 use Shopware\Bundle\AttributeBundle\Service\ConfigurationStruct;
 use Shopware\Bundle\AttributeBundle\Service\TypeMapping;
+use ShyimAttributeTransformer\Components\Entity\EntityTransformer;
 
 /**
  * Class AttributeTransformer
@@ -31,20 +32,17 @@ class AttributeTransformer
      * AttributeTransformer constructor.
      * @param CachedTableReader $tableReader
      * @param Connection $connection
-     * @param MediaTransformer $mediaTransformer
-     * @param ProductTransformer $produtTransformer
+     * @param array $transformers
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function __construct(
         CachedTableReader $tableReader,
         Connection $connection,
-        MediaTransformer $mediaTransformer,
-        ProductTransformer $produtTransformer
+        array $transformers
     ) {
         $this->tableReader = $tableReader;
         $this->connection = $connection;
-        $this->transformers['s_media'] = $mediaTransformer;
-        $this->transformers['s_articles'] = $produtTransformer;
+        $this->applyCustomTransformers($transformers);
     }
 
     /**
@@ -103,5 +101,16 @@ class AttributeTransformer
         }
 
         return $this->transformers[$tableName];
+    }
+
+    /**
+     * @param array $transformers
+     */
+    private function applyCustomTransformers(array $transformers)
+    {
+        /** @var EntityTransformer $transformer */
+        foreach ($transformers as $transformer) {
+            $this->transformers[$transformer->getEntity()] = $transformer;
+        }
     }
 }
