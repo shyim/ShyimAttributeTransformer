@@ -112,7 +112,6 @@ class ShyimAttributeTransformer extends Plugin
         $event->setReturn($form);
 
         $this->legacyStructConverter($event);
-        dd($event->getReturn());
 
         $eventArgs->getSubject()->View()->assign('sCustomPage', $event->getReturn());
     }
