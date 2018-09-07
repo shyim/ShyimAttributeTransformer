@@ -39,6 +39,9 @@ class TemplateSubscriber implements SubscriberInterface
         return [
             ShyimAttributeTransformer::TYPE_FORMS => 'transformForm',
             ShyimAttributeTransformer::TYPE_STATIC => 'transformStatic',
+            'Enlight_Controller_Action_PostDispatch' => [
+                ['transformGlobals', 200]
+            ]
         ];
     }
 
@@ -70,5 +73,36 @@ class TemplateSubscriber implements SubscriberInterface
             $static['attribute'] = $this->dataLoader->load(ShyimAttributeTransformer::TABLE_MAPPING[$type], $static['id']);
         }
         $eventArgs->getSubject()->View()->assign('sCustomPage', $this->converter->convert($type, $static));
+    }
+
+    /**
+     * @param Enlight_Controller_ActionEventArgs $eventArgs
+     */
+    public function transformGlobals(Enlight_Controller_ActionEventArgs $eventArgs)
+    {
+        $sCategories = $eventArgs->getSubject()->View()->getAssign('sCategories');
+
+        foreach ($sCategories as &$category) {
+            $category = $this->transformRecrusive(ShyimAttributeTransformer::TYPE_LIST_CATEGORY, $category, 'subcategories');
+        }
+
+        $eventArgs->getSubject()->View()->assign('sCategories', $sCategories);
+    }
+
+    /**
+     * @param array $data
+     * @param string $key
+     */
+    private function transformRecrusive($type, $data, $key)
+    {
+        $data = $this->converter->convert($type, $data);
+
+        if (!empty($data[$key])) {
+            foreach ($data[$key] as &$sub) {
+                $sub = $this->transformRecrusive($type, $sub, $key);
+            }
+        }
+
+        return $data;
     }
 }
