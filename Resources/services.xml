@@ -5,6 +5,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="shyim_media.converter" class="ShyimAttributeTransformer\Components\Converter">
+            <argument type="service" id="shyim_media.attribute_transformer"/>
+            <argument type="service" id="shyim_media.cached_table_reader"/>
+        </service>
+
         <service id="shyim_media.cached_table_reader" class="ShyimAttributeTransformer\Components\CachedTableReader">
             <argument type="service" id="cache"/>
             <argument type="service" id="shopware_attribute.crud_service"/>
@@ -29,6 +34,17 @@
             <argument type="service" id="legacy_struct_converter"/>
             <argument type="service" id="shopware_storefront.context_service"/>
             <tag name="shyim_entity_transformer"/>
+        </service>
+
+        <service id="shyim_media.subscriber.legacy_struct_converter" class="ShyimAttributeTransformer\Subscriber\LegacyStructConverter">
+            <argument type="service" id="shyim_media.converter"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="shyim_media.subscriber.template" class="ShyimAttributeTransformer\Subscriber\TemplateSubscriber">
+            <argument type="service" id="shyim_media.converter"/>
+            <argument type="service" id="shopware_attribute.data_loader"/>
+            <tag name="shopware.event_subscriber"/>
         </service>
     </services>
 </container>
