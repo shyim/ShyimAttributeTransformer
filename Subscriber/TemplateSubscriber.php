@@ -80,6 +80,10 @@ class TemplateSubscriber implements SubscriberInterface
      */
     public function transformGlobals(Enlight_Controller_ActionEventArgs $eventArgs)
     {
+        if ($eventArgs->getSubject()->Request()->getModuleName() !== 'frontend') {
+            return;
+        }
+
         $sCategories = $eventArgs->getSubject()->View()->getAssign('sCategories');
 
         foreach ($sCategories as &$category) {
