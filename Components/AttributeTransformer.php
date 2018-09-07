@@ -9,6 +9,7 @@ use ShyimAttributeTransformer\Components\Entity\EntityTransformer;
 
 /**
  * Class AttributeTransformer
+ *
  * @author Soner Sayakci <shyim@posteo.de>
  */
 class AttributeTransformer
@@ -30,9 +31,11 @@ class AttributeTransformer
 
     /**
      * AttributeTransformer constructor.
+     *
      * @param CachedTableReader $tableReader
-     * @param Connection $connection
-     * @param array $transformers
+     * @param Connection        $connection
+     * @param array             $transformers
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function __construct(
@@ -47,7 +50,8 @@ class AttributeTransformer
 
     /**
      * @param ConfigurationStruct $column
-     * @param string $ids
+     * @param string              $ids
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function addAttribute(ConfigurationStruct $column, string $ids)
@@ -68,8 +72,10 @@ class AttributeTransformer
 
     /**
      * @param ConfigurationStruct $column
-     * @param string $ids
+     * @param string              $ids
+     *
      * @author Soner Sayakci <shyim@posteo.de>
+     *
      * @return mixed|null
      */
     public function get(ConfigurationStruct $column, string $ids)
@@ -80,8 +86,8 @@ class AttributeTransformer
             return $transformer->get($ids);
         }
 
-        $ids = array_map(function ($value) use($transformer) {
-             return $transformer->get($value);
+        $ids = array_map(function ($value) use ($transformer) {
+            return $transformer->get($value);
         }, explode('|', $ids));
 
         return array_filter($ids);
@@ -89,7 +95,9 @@ class AttributeTransformer
 
     /**
      * @param ConfigurationStruct $column
+     *
      * @return ModelTransformer
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     private function getTransformer(ConfigurationStruct $column): ModelTransformer

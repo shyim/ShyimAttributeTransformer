@@ -7,15 +7,11 @@ use PDO;
 
 /**
  * Class ModelTransformer
+ *
  * @author Soner Sayakci <shyim@posteo.de>
  */
 class ModelTransformer
 {
-    /**
-     * @var string
-     */
-    private $table;
-
     /**
      * @var array
      */
@@ -25,6 +21,10 @@ class ModelTransformer
      * @var array
      */
     protected $data;
+    /**
+     * @var string
+     */
+    private $table;
 
     /**
      * @var Connection
@@ -33,8 +33,10 @@ class ModelTransformer
 
     /**
      * ModelTransformer constructor.
-     * @param string $table
+     *
+     * @param string     $table
      * @param Connection $connection
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function __construct(string $table = null, Connection $connection = null)
@@ -45,6 +47,7 @@ class ModelTransformer
 
     /**
      * @param array $ids
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function addIds(array $ids)
@@ -84,7 +87,9 @@ class ModelTransformer
 
     /**
      * @param string $index
+     *
      * @author Soner Sayakci <shyim@posteo.de>
+     *
      * @return mixed|null
      */
     public function get(string $index)

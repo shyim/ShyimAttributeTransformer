@@ -2,7 +2,6 @@
 
 namespace ShyimAttributeTransformer\Subscriber;
 
-
 use Enlight\Event\SubscriberInterface;
 use Enlight_Event_EventArgs;
 use ShyimAttributeTransformer\Components\Converter;
@@ -16,6 +15,7 @@ class LegacyStructConverter implements SubscriberInterface
 
     /**
      * LegacyStructConverter constructor.
+     *
      * @param Converter $converter
      */
     public function __construct(Converter $converter)
@@ -35,7 +35,9 @@ class LegacyStructConverter implements SubscriberInterface
 
     /**
      * @param Enlight_Event_EventArgs $args
+     *
      * @throws \Zend_Cache_Exception
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function legacyStructConverter(Enlight_Event_EventArgs $args)

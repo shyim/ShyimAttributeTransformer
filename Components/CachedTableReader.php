@@ -9,6 +9,7 @@ use Zend_Cache_Core;
 
 /**
  * Class CachedTableReader
+ *
  * @author Soner Sayakci <shyim@posteo.de>
  */
 class CachedTableReader
@@ -30,9 +31,11 @@ class CachedTableReader
 
     /**
      * CachedTableReader constructor.
+     *
      * @param Zend_Cache_Core $cache
-     * @param CrudService $crudService
-     * @param ModelManager $modelManager
+     * @param CrudService     $crudService
+     * @param ModelManager    $modelManager
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function __construct(Zend_Cache_Core $cache, CrudService $crudService, ModelManager $modelManager)
@@ -44,9 +47,12 @@ class CachedTableReader
 
     /**
      * @param string $table
-     * @return \Shopware\Bundle\AttributeBundle\Service\ConfigurationStruct[]
-     * @author Soner Sayakci <shyim@posteo.de>
+     *
      * @throws \Zend_Cache_Exception
+     *
+     * @return \Shopware\Bundle\AttributeBundle\Service\ConfigurationStruct[]
+     *
+     * @author Soner Sayakci <shyim@posteo.de>
      */
     public function getColumns(string $table)
     {
@@ -72,9 +78,12 @@ class CachedTableReader
 
     /**
      * @param string $entity
-     * @return string
-     * @author Soner Sayakci <shyim@posteo.de>
+     *
      * @throws \Zend_Cache_Exception
+     *
+     * @return string
+     *
+     * @author Soner Sayakci <shyim@posteo.de>
      */
     public function getTableName(string $entity): string
     {

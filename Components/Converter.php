@@ -7,17 +7,16 @@ use ShyimAttributeTransformer\ShyimAttributeTransformer;
 
 class Converter
 {
-    /**
-     * @var array
-     */
-    private $fieldsList;
-
     const TABLE_MAPPING = [
         ShyimAttributeTransformer::TYPE_LIST_PRODUCT => 's_articles_attributes',
         ShyimAttributeTransformer::TYPE_LIST_CATEGORY => 's_categories_attributes',
         ShyimAttributeTransformer::TYPE_FORMS => 's_cms_support_attributes',
         ShyimAttributeTransformer::TYPE_STATIC => 's_cms_static_attributes',
     ];
+    /**
+     * @var array
+     */
+    private $fieldsList;
     /**
      * @var AttributeTransformer
      */
@@ -37,7 +36,8 @@ class Converter
 
     /**
      * @param string $mapping
-     * @param array $data
+     * @param array  $data
+     *
      * @return array
      */
     public function convert($mapping, $data)
@@ -76,7 +76,9 @@ class Converter
      * @param array $fields
      * @param array $data
      * @param array $columns
+     *
      * @return array
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     private function transformAttributeFields(array $fields, array $data, array $columns): array

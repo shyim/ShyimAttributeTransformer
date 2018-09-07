@@ -2,7 +2,6 @@
 
 namespace ShyimAttributeTransformer\Subscriber;
 
-
 use Enlight\Event\SubscriberInterface;
 use Enlight_Controller_ActionEventArgs;
 use Shopware\Bundle\AttributeBundle\Service\DataLoader;
@@ -11,7 +10,6 @@ use ShyimAttributeTransformer\ShyimAttributeTransformer;
 
 class TemplateSubscriber implements SubscriberInterface
 {
-
     /**
      * @var Converter
      */
@@ -23,7 +21,8 @@ class TemplateSubscriber implements SubscriberInterface
 
     /**
      * TemplateSubscriber constructor.
-     * @param Converter $converter
+     *
+     * @param Converter  $converter
      * @param DataLoader $dataLoader
      */
     public function __construct(Converter $converter, DataLoader $dataLoader)
@@ -39,7 +38,7 @@ class TemplateSubscriber implements SubscriberInterface
     {
         return [
             ShyimAttributeTransformer::TYPE_FORMS => 'transformForm',
-            ShyimAttributeTransformer::TYPE_STATIC => 'transformStatic'
+            ShyimAttributeTransformer::TYPE_STATIC => 'transformStatic',
         ];
     }
 
@@ -58,6 +57,7 @@ class TemplateSubscriber implements SubscriberInterface
 
     /**
      * @param Enlight_Controller_ActionEventArgs $eventArgs
+     *
      * @throws \Exception
      */
     public function transformStatic(Enlight_Controller_ActionEventArgs $eventArgs)
