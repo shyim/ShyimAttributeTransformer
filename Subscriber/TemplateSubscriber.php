@@ -87,7 +87,7 @@ class TemplateSubscriber implements SubscriberInterface
         $sCategories = $eventArgs->getSubject()->View()->getAssign('sCategories');
 
         foreach ($sCategories as &$category) {
-            $category = $this->transformRecrusive(ShyimAttributeTransformer::TYPE_LIST_CATEGORY, $category, 'subcategories');
+            $category = $this->transformRecursive(ShyimAttributeTransformer::TYPE_LIST_CATEGORY, $category, 'subcategories');
         }
 
         $eventArgs->getSubject()->View()->assign('sCategories', $sCategories);
@@ -97,13 +97,13 @@ class TemplateSubscriber implements SubscriberInterface
      * @param array $data
      * @param string $key
      */
-    private function transformRecrusive($type, $data, $key)
+    private function transformRecursive($type, $data, $key)
     {
         $data = $this->converter->convert($type, $data);
 
         if (!empty($data[$key])) {
             foreach ($data[$key] as &$sub) {
-                $sub = $this->transformRecrusive($type, $sub, $key);
+                $sub = $this->transformRecursive($type, $sub, $key);
             }
         }
 
