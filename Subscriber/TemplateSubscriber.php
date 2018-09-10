@@ -85,12 +85,18 @@ class TemplateSubscriber implements SubscriberInterface
         }
 
         $sCategories = $eventArgs->getSubject()->View()->getAssign('sCategories');
+        $mainCategories = $eventArgs->getSubject()->View()->getAssign('sMainCategories');
 
         foreach ($sCategories as &$category) {
-            $category = $this->transformRecursive(ShyimAttributeTransformer::TYPE_LIST_CATEGORY, $category, 'subcategories');
+            $category = $this->transformRecrusive(ShyimAttributeTransformer::TYPE_LIST_CATEGORY, $category, 'subcategories');
+        }
+
+        foreach ($mainCategories as &$category) {
+            $category = $this->transformRecrusive(ShyimAttributeTransformer::TYPE_LIST_CATEGORY, $category, 'subcategories');
         }
 
         $eventArgs->getSubject()->View()->assign('sCategories', $sCategories);
+        $eventArgs->getSubject()->View()->assign('sMainCategories', $mainCategories);
     }
 
     /**
