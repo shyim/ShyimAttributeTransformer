@@ -44,6 +44,10 @@ class LegacyStructConverter implements SubscriberInterface
     {
         $data = $args->getReturn();
         $eventName = $args->getName();
+        
+        if ($eventName === 'Legacy_Struct_Converter_Convert_Product') {
+            $eventName = 'Legacy_Struct_Converter_Convert_List_Product';
+        }
 
         $args->setReturn($this->converter->convert($eventName, $data));
     }
