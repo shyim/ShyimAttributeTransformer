@@ -3,7 +3,7 @@
 namespace ShyimAttributeTransformer\Components\Entity;
 
 use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
-use Shopware\Bundle\StoreFrontBundle\Service\Core\MediaService;
+use Shopware\Bundle\StoreFrontBundle\Service\MediaServiceInterface;
 use Shopware\Components\Compatibility\LegacyStructConverter;
 use ShyimAttributeTransformer\Components\ModelTransformer;
 
@@ -30,12 +30,12 @@ class MediaTransformer extends ModelTransformer implements EntityTransformer
 
     /**
      * MediaTransformer constructor.
-     * @param MediaService $mediaService
+     * @param MediaServiceInterface $mediaService
      * @param LegacyStructConverter $converter
      * @param ContextServiceInterface $contextService
      * @author Soner Sayakci <shyim@posteo.de>
      */
-    public function __construct(MediaService $mediaService, LegacyStructConverter $converter, ContextServiceInterface $contextService)
+    public function __construct(MediaServiceInterface $mediaService, LegacyStructConverter $converter, ContextServiceInterface $contextService)
     {
         parent::__construct();
         $this->mediaService = $mediaService;
