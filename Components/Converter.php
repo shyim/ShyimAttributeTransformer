@@ -86,6 +86,10 @@ class Converter
         $hasFoundKey = false;
 
         foreach ($data as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+
             if (\in_array($key, $fields, true)) {
                 if (empty($value)) {
                     continue;
@@ -103,6 +107,10 @@ class Converter
         $this->transformer->resolve();
 
         foreach ($data as $key => &$value) {
+            if (empty($value)) {
+                continue;
+            }
+
             if (\in_array($key, $fields, true)) {
                 $value = $this->transformer->get($columns[$key], $value);
             }
