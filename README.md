@@ -92,5 +92,29 @@ array (size=37)
 ### How to configure it?
 
 * Created a new attribute using backend freetext module (Only works with single / multi selection)
-* Add your new attribute to the config.php inside the plugin directory
+* Add your new attribute to the config.php of shopware installation
 * Your attribute variable is transformed in template
+
+## Example config.php
+
+```php
+<?php
+return [
+    'db' => [
+        'username' => 'root',
+        'password' => 'root',
+        'dbname' => 'sw52',
+        'host' => 'mysql',
+        'port' => '3306'
+    ],
+    'transformer' => [
+        'Legacy_Struct_Converter_Convert_Category' => [
+            'my_category_attribute'
+        ],
+        'Legacy_Struct_Converter_Convert_List_Product' => [
+            'my_product_attribute'
+        ]
+    ]
+];
+```
+See [here](https://github.com/shyim/ShyimAttributeTransformer/blob/master/ShyimAttributeTransformer.php#L15) for all configurations
