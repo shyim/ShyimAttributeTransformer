@@ -29,6 +29,13 @@
             <tag name="shyim_entity_transformer"/>
         </service>
 
+        <service id="shyim_media.country_transformer" class="ShyimAttributeTransformer\Components\Entity\CountryTransformer">
+            <argument type="service" id="shopware_storefront.country_gateway"/>
+            <argument type="service" id="legacy_struct_converter"/>
+            <argument type="service" id="shopware_storefront.context_service"/>
+            <tag name="shyim_entity_transformer"/>
+        </service>
+
         <service id="shyim_media.product_transformer" class="ShyimAttributeTransformer\Components\Entity\ProductTransformer">
             <argument type="service" id="shopware_storefront.list_product_service"/>
             <argument type="service" id="legacy_struct_converter"/>
