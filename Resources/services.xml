@@ -8,6 +8,7 @@
         <service id="shyim_media.converter" class="ShyimAttributeTransformer\Components\Converter">
             <argument type="service" id="shyim_media.attribute_transformer"/>
             <argument type="service" id="shyim_media.cached_table_reader"/>
+            <argument type="service" id="service_container"/>
         </service>
 
         <service id="shyim_media.cached_table_reader" class="ShyimAttributeTransformer\Components\CachedTableReader">

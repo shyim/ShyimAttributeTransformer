@@ -4,6 +4,7 @@ namespace ShyimAttributeTransformer\Components;
 
 use Shopware\Bundle\StoreFrontBundle\Struct\Attribute;
 use ShyimAttributeTransformer\ShyimAttributeTransformer;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class Converter
 {
@@ -26,10 +27,15 @@ class Converter
      * @var CachedTableReader
      */
     private $cachedTableReader;
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
-    public function __construct(AttributeTransformer $transformer, CachedTableReader $cachedTableReader)
+    public function __construct(AttributeTransformer $transformer, CachedTableReader $cachedTableReader, ContainerInterface $container)
     {
-        $this->fieldsList = require dirname(__DIR__) . '/config.php';
+        $this->container = $container;
+        $this->fieldsList = $this->loadFieldList();
         $this->transformer = $transformer;
         $this->cachedTableReader = $cachedTableReader;
     }
@@ -119,5 +125,16 @@ class Converter
         unset($value);
 
         return $data;
+    }
+
+    private function loadFieldList()
+    {
+        if ($this->container->hasParameter('shopware.transformer')) {
+            return $this->container->getParameter('shopware.transformer');
+        }
+
+        trigger_error('[ShyimAttributeTransformer] The usage of config.php in plugin directory is deprecated. Please use add it to the config.php in the project root instead', E_USER_DEPRECATED);
+
+        return require dirname(__DIR__) . '/config.php';
     }
 }
