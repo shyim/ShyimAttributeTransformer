@@ -50,12 +50,11 @@ class ProductTransformer extends ModelTransformer implements EntityTransformer
     {
         if (!empty($this->ids)) {
             $products = $this->listProductService->getList($this->ids, $this->contextService->getShopContext());
+            $this->ids = [];
 
             foreach ($products as $product) {
                 $this->data[$product->getNumber()] = $this->converter->convertListProductStruct($product);
             }
-
-            $this->ids = [];
         }
     }
 

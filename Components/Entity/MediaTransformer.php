@@ -50,12 +50,11 @@ class MediaTransformer extends ModelTransformer implements EntityTransformer
     {
         if (!empty($this->ids)) {
             $medias = $this->mediaService->getList($this->ids, $this->contextService->getShopContext());
+            $this->ids = [];
 
             foreach ($medias as $media) {
                 $this->data[$media->getId()] = $this->converter->convertMediaStruct($media);
             }
-
-            $this->ids = [];
         }
     }
 

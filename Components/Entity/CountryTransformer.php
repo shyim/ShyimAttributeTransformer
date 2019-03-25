@@ -46,12 +46,11 @@ class CountryTransformer extends ModelTransformer implements EntityTransformer
     {
         if (!empty($this->ids)) {
             $countries = $this->countryGateway->getCountries($this->ids, $this->contextService->getShopContext());
+            $this->ids = [];
 
             foreach ($countries as $country) {
                 $this->data[$country->getId()] = $this->converter->convertCountryStruct($country);
             }
-
-            $this->ids = [];
         }
     }
 

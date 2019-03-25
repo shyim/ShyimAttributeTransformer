@@ -44,6 +44,13 @@
             <tag name="shyim_entity_transformer"/>
         </service>
 
+        <service id="shyim_media.manufacturer_transformer" class="ShyimAttributeTransformer\Components\Entity\ManufacturerTransformer">
+            <argument type="service" id="shopware_storefront.manufacturer_service"/>
+            <argument type="service" id="shopware_storefront.context_service"/>
+            <argument type="service" id="legacy_struct_converter"/>
+            <tag name="shyim_entity_transformer"/>
+        </service>
+
         <service id="shyim_media.subscriber.legacy_struct_converter" class="ShyimAttributeTransformer\Subscriber\LegacyStructConverter">
             <argument type="service" id="shyim_media.converter"/>
             <tag name="shopware.event_subscriber"/>

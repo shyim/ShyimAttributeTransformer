@@ -13,6 +13,7 @@ class Converter
         ShyimAttributeTransformer::TYPE_LIST_CATEGORY => 's_categories_attributes',
         ShyimAttributeTransformer::TYPE_FORMS => 's_cms_support_attributes',
         ShyimAttributeTransformer::TYPE_STATIC => 's_cms_static_attributes',
+        ShyimAttributeTransformer::TYPE_MANUFACTURER => 's_articles_supplier_attributes',
     ];
     /**
      * @var array
@@ -134,6 +135,10 @@ class Converter
         }
 
         trigger_error('[ShyimAttributeTransformer] The usage of config.php in plugin directory is deprecated. Please use add it to the config.php in the project root instead', E_USER_DEPRECATED);
+
+        if (!file_exists(dirname(__DIR__) . '/config.php')) {
+            return [];
+        }
 
         return require dirname(__DIR__) . '/config.php';
     }
