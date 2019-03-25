@@ -49,6 +49,10 @@ class TemplateSubscriber implements SubscriberInterface
     {
         $form = $eventArgs->getSubject()->View()->getAssign('sSupport');
 
+        if (!$form['id']) {
+            return;
+        }
+
         $type = ShyimAttributeTransformer::TYPE_FORMS;
 
         if (!isset($form['attribute'])) {
@@ -66,6 +70,10 @@ class TemplateSubscriber implements SubscriberInterface
     public function transformStatic(Enlight_Controller_ActionEventArgs $eventArgs)
     {
         $static = $eventArgs->getSubject()->View()->getAssign('sCustomPage');
+
+        if (!$static['id']) {
+            return;
+        }
 
         $type = ShyimAttributeTransformer::TYPE_STATIC;
 
