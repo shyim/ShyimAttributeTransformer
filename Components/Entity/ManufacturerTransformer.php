@@ -3,7 +3,6 @@
 
 namespace ShyimAttributeTransformer\Components\Entity;
 
-
 use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Service\ManufacturerServiceInterface;
 use Shopware\Components\Compatibility\LegacyStructConverter;
@@ -54,6 +53,5 @@ class ManufacturerTransformer extends ModelTransformer implements EntityTransfor
                 $this->data[$manufacturer->getId()] = $this->legacyStructConverter->convertManufacturerStruct($manufacturer);
             }
         }
-
     }
 }
