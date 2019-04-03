@@ -8,13 +8,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class Converter
 {
-    const TABLE_MAPPING = [
-        ShyimAttributeTransformer::TYPE_LIST_PRODUCT => 's_articles_attributes',
-        ShyimAttributeTransformer::TYPE_LIST_CATEGORY => 's_categories_attributes',
-        ShyimAttributeTransformer::TYPE_FORMS => 's_cms_support_attributes',
-        ShyimAttributeTransformer::TYPE_STATIC => 's_cms_static_attributes',
-        ShyimAttributeTransformer::TYPE_MANUFACTURER => 's_articles_supplier_attributes',
-    ];
     /**
      * @var array
      */
@@ -46,6 +39,9 @@ class Converter
      * @param array  $data
      *
      * @return array
+     *
+     * @throws \Zend_Cache_Exception
+     * @throws \Exception
      */
     public function convert($mapping, $data)
     {
@@ -53,7 +49,7 @@ class Converter
             return $data;
         }
 
-        $table = self::TABLE_MAPPING[$mapping];
+        $table = ShyimAttributeTransformer::TABLE_MAPPING[$mapping];
         $fields = $this->fieldsList[$mapping];
 
         $columns = $this->cachedTableReader->getColumns($table);
@@ -62,10 +58,15 @@ class Converter
             return $data;
         }
 
+        // Legacy_Struct_Converter_Convert_Category
         if (isset($data['attribute'])) {
             $data['attribute'] = $this->transformAttributeFields($fields, $data['attribute'], $columns);
         }
 
+        // Legacy_Struct_Converter_Convert_Category
+        // Legacy_Struct_Converter_Convert_List_Product/Legacy_Struct_Converter_Convert_Product
+        // Legacy_Struct_Converter_Convert_Manufacturer
+        // Legacy_Struct_Converter_Convert_Configurator_Option
         if (isset($data['attributes']['core'])) {
             $attributeData = $data['attributes']['core']->jsonSerialize();
             if (!empty($attributeData)) {
@@ -74,6 +75,22 @@ class Converter
             }
         }
 
+        switch ($mapping) {
+            case 'Legacy_Struct_Converter_Convert_Property_Set':
+            case 'Legacy_Struct_Converter_Convert_Property_Option':
+                foreach ($data as &$option) {
+                    if (isset($option['attributes']['core'])) {
+                        $attributeData = $option['attributes']['core']->jsonSerialize();
+                        if (!empty($attributeData)) {
+                            $attributeData = $this->transformAttributeFields($fields, $attributeData, $columns);
+                            $option['attributes']['core'] = new Attribute($attributeData);
+                        }
+                    }
+                }
+                break;
+        }
+
+        // Legacy_Struct_Converter_Convert_List_Product/Legacy_Struct_Converter_Convert_Product
         $data = $this->transformAttributeFields($fields, $data, $columns);
 
         return $data;
@@ -85,6 +102,8 @@ class Converter
      * @param array $columns
      *
      * @return array
+     *
+     * @throws \Zend_Cache_Exception
      *
      * @author Soner Sayakci <shyim@posteo.de>
      */

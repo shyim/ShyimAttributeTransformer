@@ -110,6 +110,8 @@ class TemplateSubscriber implements SubscriberInterface
     /**
      * @param array $data
      * @param string $key
+     *
+     * @return array
      */
     private function transformRecursive($type, $data, $key)
     {

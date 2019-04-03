@@ -30,6 +30,9 @@ class LegacyStructConverter implements SubscriberInterface
             'Legacy_Struct_Converter_Convert_Category' => 'legacyStructConverter',
             'Legacy_Struct_Converter_Convert_List_Product' => 'legacyStructConverter',
             'Legacy_Struct_Converter_Convert_Product' => 'legacyStructConverter',
+            'Legacy_Struct_Converter_Convert_Property_Set' => 'legacyStructConverter',
+            'Legacy_Struct_Converter_Convert_Configurator_Option' => 'legacyStructConverter',
+            'Legacy_Struct_Converter_Convert_Property_Option' => 'legacyStructConverter',
         ];
     }
 
