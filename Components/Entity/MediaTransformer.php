@@ -14,7 +14,7 @@ use ShyimAttributeTransformer\Components\ModelTransformer;
 class MediaTransformer extends ModelTransformer implements EntityTransformer
 {
     /**
-     * @var MediaService
+     * @var MediaServiceInterface
      */
     private $mediaService;
 
@@ -30,9 +30,11 @@ class MediaTransformer extends ModelTransformer implements EntityTransformer
 
     /**
      * MediaTransformer constructor.
+     *
      * @param MediaServiceInterface $mediaService
      * @param LegacyStructConverter $converter
      * @param ContextServiceInterface $contextService
+     *
      * @author Soner Sayakci <shyim@posteo.de>
      */
     public function __construct(MediaServiceInterface $mediaService, LegacyStructConverter $converter, ContextServiceInterface $contextService)

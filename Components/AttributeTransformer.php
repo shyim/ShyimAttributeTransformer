@@ -50,7 +50,9 @@ class AttributeTransformer
 
     /**
      * @param ConfigurationStruct $column
-     * @param string              $ids
+     * @param string $ids
+     *
+     * @throws \Zend_Cache_Exception
      *
      * @author Soner Sayakci <shyim@posteo.de>
      */
@@ -72,11 +74,13 @@ class AttributeTransformer
 
     /**
      * @param ConfigurationStruct $column
-     * @param string              $ids
-     *
-     * @author Soner Sayakci <shyim@posteo.de>
+     * @param string $ids
      *
      * @return mixed|null
+     *
+     * @throws \Zend_Cache_Exception
+     *
+     * @author Soner Sayakci <shyim@posteo.de>
      */
     public function get(ConfigurationStruct $column, string $ids)
     {
@@ -97,6 +101,8 @@ class AttributeTransformer
      * @param ConfigurationStruct $column
      *
      * @return ModelTransformer
+     *
+     * @throws \Zend_Cache_Exception
      *
      * @author Soner Sayakci <shyim@posteo.de>
      */
