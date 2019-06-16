@@ -61,5 +61,13 @@
             <argument type="service" id="shopware_attribute.data_loader"/>
             <tag name="shopware.event_subscriber"/>
         </service>
+
+        <service id="shyim_attribute_transformer.components.product_search_decorator"
+                 class="ShyimAttributeTransformer\Components\ProductSearchDecorator"
+                 decorates="shopware_search.product_search"
+                 public="false">
+            <argument type="service" id="shyim_attribute_transformer.components.product_search_decorator.inner"/>
+            <argument type="service" id="shyim_media.converter"/>
+        </service>
     </services>
 </container>

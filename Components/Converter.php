@@ -67,6 +67,8 @@ class Converter
         // Legacy_Struct_Converter_Convert_List_Product/Legacy_Struct_Converter_Convert_Product
         // Legacy_Struct_Converter_Convert_Manufacturer
         // Legacy_Struct_Converter_Convert_Configurator_Option
+        // ProductSearch_Facet
+        // ProductSearch_Facet_Value
         if (isset($data['attributes']['core'])) {
             $attributeData = $data['attributes']['core']->jsonSerialize();
             if (!empty($attributeData)) {
@@ -77,7 +79,6 @@ class Converter
 
         switch ($mapping) {
             case 'Legacy_Struct_Converter_Convert_Property_Set':
-            case 'Legacy_Struct_Converter_Convert_Property_Option':
                 foreach ($data as &$option) {
                     if (isset($option['attributes']['core'])) {
                         $attributeData = $option['attributes']['core']->jsonSerialize();
