@@ -33,6 +33,7 @@ class LegacyStructConverter implements SubscriberInterface
             'Legacy_Struct_Converter_Convert_Property_Set' => 'legacyStructConverter',
             'Legacy_Struct_Converter_Convert_Configurator_Option' => 'legacyStructConverter',
             'Legacy_Struct_Converter_Convert_Property_Option' => 'legacyStructConverter',
+            'Legacy_Struct_Converter_Convert_Payment' => 'legacyStructConverter',
         ];
     }
 

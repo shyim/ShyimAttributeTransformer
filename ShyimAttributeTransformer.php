@@ -18,6 +18,7 @@ class ShyimAttributeTransformer extends Plugin
     const TYPE_PROPERTY_VALUE2 = 'ProductSearch_Facet_Value';
     const TYPE_FORMS = 'Enlight_Controller_Action_PostDispatch_Frontend_Forms';
     const TYPE_STATIC = 'Enlight_Controller_Action_PostDispatch_Frontend_Custom';
+    const TYPE_PAYMENT = 'Legacy_Struct_Converter_Convert_Payment';
 
     const TABLE_MAPPING = [
         self::TYPE_LIST_PRODUCT => 's_articles_attributes',
@@ -29,7 +30,8 @@ class ShyimAttributeTransformer extends Plugin
         self::TYPE_PROPERTY_VALUE2 => 's_filter_values_attributes',
         self::TYPE_FORMS => 's_cms_support_attributes',
         self::TYPE_STATIC => 's_cms_static_attributes',
-        self::TYPE_MANUFACTURER => 's_articles_supplier_attributes'
+        self::TYPE_MANUFACTURER => 's_articles_supplier_attributes',
+        self::TYPE_PAYMENT => 's_core_paymentmeans_attributes',
     ];
 
     public function build(ContainerBuilder $container)
