@@ -33,10 +33,4 @@ class ShyimAttributeTransformer extends Plugin
         self::TYPE_MANUFACTURER => 's_articles_supplier_attributes',
         self::TYPE_PAYMENT => 's_core_paymentmeans_attributes',
     ];
-
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new EntityTransformerCompilerPass());
-    }
 }

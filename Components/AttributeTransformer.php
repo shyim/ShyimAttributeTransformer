@@ -29,43 +29,23 @@ class AttributeTransformer
      */
     private $connection;
 
-    /**
-     * AttributeTransformer constructor.
-     *
-     * @param CachedTableReader $tableReader
-     * @param Connection        $connection
-     * @param array             $transformers
-     *
-     * @author Soner Sayakci <shyim@posteo.de>
-     */
     public function __construct(
         CachedTableReader $tableReader,
         Connection $connection,
-        array $transformers
+        iterable $transformers
     ) {
         $this->tableReader = $tableReader;
         $this->connection = $connection;
         $this->applyCustomTransformers($transformers);
     }
 
-    /**
-     * @param ConfigurationStruct $column
-     * @param string $ids
-     *
-     * @throws \Zend_Cache_Exception
-     *
-     * @author Soner Sayakci <shyim@posteo.de>
-     */
     public function addAttribute(ConfigurationStruct $column, string $ids)
     {
         $transformer = $this->getTransformer($column);
         $transformer->addIds(array_filter(explode('|', $ids)));
     }
 
-    /**
-     * @author Soner Sayakci <shyim@posteo.de>
-     */
-    public function resolve()
+    public function resolve(): void
     {
         foreach ($this->transformers as $transformer) {
             $transformer->resolve();
@@ -73,14 +53,7 @@ class AttributeTransformer
     }
 
     /**
-     * @param ConfigurationStruct $column
-     * @param string $ids
-     *
      * @return mixed|null
-     *
-     * @throws \Zend_Cache_Exception
-     *
-     * @author Soner Sayakci <shyim@posteo.de>
      */
     public function get(ConfigurationStruct $column, string $ids)
     {
@@ -97,15 +70,6 @@ class AttributeTransformer
         return array_filter($ids);
     }
 
-    /**
-     * @param ConfigurationStruct $column
-     *
-     * @return ModelTransformer
-     *
-     * @throws \Zend_Cache_Exception
-     *
-     * @author Soner Sayakci <shyim@posteo.de>
-     */
     private function getTransformer(ConfigurationStruct $column): ModelTransformer
     {
         $tableName = $this->tableReader->getTableName($column->getEntity());
@@ -117,10 +81,7 @@ class AttributeTransformer
         return $this->transformers[$tableName];
     }
 
-    /**
-     * @param array $transformers
-     */
-    private function applyCustomTransformers(array $transformers)
+    private function applyCustomTransformers(iterable $transformers)
     {
         /** @var EntityTransformer $transformer */
         foreach ($transformers as $transformer) {

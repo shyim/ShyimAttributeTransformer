@@ -20,7 +20,7 @@
         <service id="shyim_media.attribute_transformer" class="ShyimAttributeTransformer\Components\AttributeTransformer">
             <argument type="service" id="shyim_media.cached_table_reader"/>
             <argument type="service" id="dbal_connection"/>
-            <argument type="collection"/>
+            <argument type="tagged" tag="shyim_entity_transformer"/>
         </service>
 
         <service id="shyim_media.media_transformer" class="ShyimAttributeTransformer\Components\Entity\MediaTransformer">
