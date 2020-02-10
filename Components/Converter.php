@@ -63,7 +63,7 @@ class Converter
             if(is_array($data['attribute'])) {
                 $data['attribute'] = $this->transformAttributeFields($fields, $data['attribute'], $columns);
             }
-            if(is_object($data['attribute'])){
+            elseif(is_object($data['attribute'])){
                 $attributeData = $data['attribute']->jsonSerialize();
                 if (!empty($attributeData)) {
                     $attributeData = $this->transformAttributeFields($fields, $attributeData, $columns);
