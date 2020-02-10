@@ -60,7 +60,16 @@ class Converter
 
         // Legacy_Struct_Converter_Convert_Category
         if (isset($data['attribute'])) {
-            $data['attribute'] = $this->transformAttributeFields($fields, $data['attribute'], $columns);
+            if(is_array($data['attribute'])) {
+                $data['attribute'] = $this->transformAttributeFields($fields, $data['attribute'], $columns);
+            }
+            elseif(is_object($data['attribute'])){
+                $attributeData = $data['attribute']->jsonSerialize();
+                if (!empty($attributeData)) {
+                    $attributeData = $this->transformAttributeFields($fields, $attributeData, $columns);
+                    $data['attribute'] = new Attribute($attributeData);
+                }
+            }
         }
 
         // Legacy_Struct_Converter_Convert_Category
