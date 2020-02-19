@@ -88,7 +88,7 @@ class TemplateSubscriber implements SubscriberInterface
      */
     public function transformGlobals(Enlight_Controller_ActionEventArgs $eventArgs)
     {
-        if ($eventArgs->getSubject()->Request()->getModuleName() !== 'frontend') {
+        if ($eventArgs->getSubject()->Request()->getModuleName() !== 'frontend' || $eventArgs->getSubject()->Request()->getControllerName() === 'error') {
             return;
         }
 
