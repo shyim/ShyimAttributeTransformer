@@ -34,6 +34,7 @@ class LegacyStructConverter implements SubscriberInterface
             'Legacy_Struct_Converter_Convert_Configurator_Option' => 'legacyStructConverter',
             'Legacy_Struct_Converter_Convert_Property_Option' => 'legacyStructConverter',
             'Legacy_Struct_Converter_Convert_Payment' => 'legacyStructConverter',
+            'Legacy_Struct_Converter_List_Product_Data' => 'legacyStructConverter',
         ];
     }
 
@@ -51,6 +52,10 @@ class LegacyStructConverter implements SubscriberInterface
         
         if ($eventName === 'Legacy_Struct_Converter_Convert_Product') {
             $eventName = 'Legacy_Struct_Converter_Convert_List_Product';
+        }
+
+        if ($eventName === 'Legacy_Struct_Converter_List_Product_Data') {
+            $eventName = 'Legacy_Struct_Converter_Convert_Manufacturer';
         }
 
         $args->setReturn($this->converter->convert($eventName, $data));
