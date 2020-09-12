@@ -98,6 +98,16 @@ class Converter
                     }
                 }
                 break;
+
+            case 'Legacy_Struct_Converter_Convert_Manufacturer':
+                if(isset($data['supplier_attributes']) && isset($data['supplier_attributes']['core'])) {
+                    $attributeData = $data['supplier_attributes']['core']->jsonSerialize();
+                    if (!empty($attributeData)) {
+                        $attributeData = $this->transformAttributeFields($fields, $attributeData, $columns);
+                        $data['supplier_attributes']['core'] = new Attribute($attributeData);
+                    }
+                }
+                break;
         }
 
         // Legacy_Struct_Converter_Convert_List_Product/Legacy_Struct_Converter_Convert_Product
