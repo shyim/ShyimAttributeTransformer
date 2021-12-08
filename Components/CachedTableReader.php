@@ -2,7 +2,7 @@
 
 namespace ShyimAttributeTransformer\Components;
 
-use Shopware\Bundle\AttributeBundle\Service\CrudService;
+use Shopware\Bundle\AttributeBundle\Service\CrudServiceInterface;
 use Shopware\Bundle\AttributeBundle\Service\TypeMapping;
 use Shopware\Components\Model\ModelManager;
 use Zend_Cache_Core;
@@ -20,7 +20,7 @@ class CachedTableReader
     private $cache;
 
     /**
-     * @var CrudService
+     * @var CrudServiceInterface
      */
     private $crudService;
 
@@ -32,13 +32,13 @@ class CachedTableReader
     /**
      * CachedTableReader constructor.
      *
-     * @param Zend_Cache_Core $cache
-     * @param CrudService     $crudService
-     * @param ModelManager    $modelManager
+     * @param Zend_Cache_Core       $cache
+     * @param CrudServiceInterface  $crudService
+     * @param ModelManager          $modelManager
      *
      * @author Soner Sayakci <shyim@posteo.de>
      */
-    public function __construct(Zend_Cache_Core $cache, CrudService $crudService, ModelManager $modelManager)
+    public function __construct(Zend_Cache_Core $cache, CrudServiceInterface $crudService, ModelManager $modelManager)
     {
         $this->cache = $cache;
         $this->crudService = $crudService;
