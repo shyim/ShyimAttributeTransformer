@@ -15,12 +15,13 @@ class ModelTransformer
     /**
      * @var array
      */
-    protected $ids;
+    protected $ids = [];
 
     /**
      * @var array
      */
-    protected $data;
+    protected $data = [];
+
     /**
      * @var string
      */
